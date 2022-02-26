@@ -43,3 +43,27 @@ Test picture：test0.jpg
 Detection result：test0_infer.jpg
 
 Detection frame extraction：test0_frame0.jpg
+
+# Identify with [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)
+PaddleOCR aims to create multilingual, awesome, leading, and practical OCR tools that help users train better models and apply them into practice. More obout PaddleOCR in [PaddleOCR Quick Start](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.4/doc/doc_en/quickstart_en.md).
+
+1. Download training model
+```bash
+!wget https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_rec_train.tar
+```
+2. Unzip training model to PaddleOCR
+```bash
+infer_path='infer'
+if not os.path.exists(infer_path):
+    os.mkdir(infer_path) 
+!tar -xf ch_ppocr_mobile_v2.0_rec_train.tar -C infer
+```
+3. Identification detection frame in PaddleOCR.
+```bash
+!python tools/infer_rec.py \
+    -c configs/rec/ch_ppocr_v2.0/rec_chinese_lite_train_v2.0.yml \
+    -o \
+        Global.pretrained_model=infer/ch_ppocr_mobile_v2.0_rec_train/best_accuracy \
+        Global.infer_img=output/test0/test0_frame0.jpg \
+```
+
