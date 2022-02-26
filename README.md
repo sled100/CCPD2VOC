@@ -37,6 +37,9 @@ PaddleDetection is an end-to-end object detection development kit based on Paddl
         weights=output/yolov3_mobilenet_v3_large_ssld_270e_ccpd_voc/best_model \
 ```
 5. Display of test results
-Test picture：![](test0.jpg)
-Detection result：![](test0_infer.jpg)
-Detection frame extraction：![](test0_frame0.jpg)
+
+Test picture：test0.jpg
+
+Detection result：test0_infer.jpg
+
+Detection frame extraction：test0_frame0.jpg
