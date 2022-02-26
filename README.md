@@ -14,11 +14,26 @@ Each picture in the CCPD dataset contains only one object frame whose name is th
 # Training with [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
 PaddleDetection is an end-to-end object detection development kit based on PaddlePaddle. More about PaddleDetection in [Getting Started](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.3/docs/tutorials/GETTING_STARTED.md).
 
+1. Download PaddleDetection and setup.
+```bash
+!git clone https://github.com/PaddlePaddle/PaddleDetection.git
+```
 
-1. Generate CCPD dataset config file, specify the path for train.txt and val.txt location. copy CCPD to PaddleDetection.
+```bash
+%cd PaddleDetection/
+!pip install -r requirements.txt
+```
 
-2. Select the object detection network structure and modify the dataset config file in the main config file.
-3. Training example.
+```bash
+%cd PaddleDetection/
+!python setup.py install
+```
+
+2. Generate CCPD dataset config file, specify the path for train.txt and val.txt location. copy CCPD to PaddleDetection.
+
+3. Select the object detection network structure and modify the dataset config file in the main config file.
+
+4. Training example in PaddleDetection.
 ```bash
 !python -u tools/train.py -c configs/yolov3/yolov3_mobilenet_v3_large_ssld_270e_ccpd_voc.yml \
                 --use_vdl=true \
@@ -26,7 +41,7 @@ PaddleDetection is an end-to-end object detection development kit based on Paddl
                 --eval
 ```
 
-4. Detection example
+5. Detection example in PaddleDetection.
 ```bash
 
 !python tools/infer.py \
@@ -36,7 +51,9 @@ PaddleDetection is an end-to-end object detection development kit based on Paddl
         output_dir=output/  \
         weights=output/yolov3_mobilenet_v3_large_ssld_270e_ccpd_voc/best_model \
 ```
-5. Display of test results
+6. Display of test results in PaddleDetection
+
+trainer.py replaces PaddleDetection/ppdet/engine/trainer.py the detection frame will be saved as a picture.
 
 Test picture：test0.jpg
 
@@ -47,18 +64,33 @@ Detection frame extraction：test0_frame0.jpg
 # Identify with [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)
 PaddleOCR aims to create multilingual, awesome, leading, and practical OCR tools that help users train better models and apply them into practice. More obout PaddleOCR in [PaddleOCR Quick Start](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.4/doc/doc_en/quickstart_en.md).
 
-1. Download training model
+1. Download PaddleOCR and setup.
+```bash
+!git clone https://github.com/PaddlePaddle/PaddleOCR.git
+```
+
+```bash
+%cd PaddleOCR/
+!pip install -r requirements.txt
+```
+
+```bash
+%cd PaddleOCR/
+!python setup.py install
+```
+
+2. Download training model
 ```bash
 !wget https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_rec_train.tar
 ```
-2. Unzip training model to PaddleOCR
+3. Unzip training model to PaddleOCR
 ```bash
 infer_path='infer'
 if not os.path.exists(infer_path):
     os.mkdir(infer_path) 
 !tar -xf ch_ppocr_mobile_v2.0_rec_train.tar -C infer
 ```
-3. Identification detection frame in PaddleOCR.
+4. Identification detection frame in PaddleOCR.
 ```bash
 !python tools/infer_rec.py \
     -c configs/rec/ch_ppocr_v2.0/rec_chinese_lite_train_v2.0.yml \
